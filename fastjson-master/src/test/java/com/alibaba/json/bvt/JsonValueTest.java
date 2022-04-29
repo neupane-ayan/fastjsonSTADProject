@@ -17,10 +17,16 @@ package com.alibaba.json.bvt;
 
 import java.util.Date;
 
+import com.alibaba.fastjson.parser.JSONScanner;
 import org.junit.Assert;
 import junit.framework.TestCase;
 
 import com.alibaba.fastjson.JSON;
+import org.junit.Test;
+
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertThrows;
+import com.alibaba.fastjson.util.Base64;
 
 public class JsonValueTest extends TestCase {
 
@@ -41,6 +47,14 @@ public class JsonValueTest extends TestCase {
     public void test_bug_1() throws Exception {
         String text = "[{\"S\":2,\"T\":\"ConnectResp\"},\n\r \t{\"VAL\" :null}]\r\f";
         JSON.parseArray(text);
+    }
+
+    @Test
+    public void testScannerDate() {
+        JSONScanner jsonScanner = new JSONScanner("\"06/21/2022");
+        assertThrows(Exception.class, () -> {
+          jsonScanner.scanDate('/');
+        });
     }
 
 }

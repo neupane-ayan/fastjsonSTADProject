@@ -87,8 +87,8 @@
                 <version>3.8.0</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
-                    <source>${jdk.version}</source>
-                    <target>${jdk.version}</target>
+                    <source>8</source>
+                    <target>8</target>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -191,10 +191,41 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>io.gatling</groupId>
+                <artifactId>gatling-maven-plugin</artifactId>
+                <version>4.1.6-M1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <version>1.5.0</version>
+                <configuration>
+                    <targetClasses>
+                        <param>com.alibaba.fastjson.util.Base64</param>
+                        <param>com.alibaba.fastjson.util.TypeUtils</param>
+                    </targetClasses>
+                    <targetTests>
+                        <param>com.alibaba.fastjson.util.*</param>
+                        <param>com.alibaba.json.bvt.*</param>
+                    </targetTests>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>org.pitest</groupId>
+            <artifactId>pitest-maven</artifactId>
+            <version>1.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.gatling</groupId>
+            <artifactId>gatling-maven-plugin</artifactId>
+            <version>4.1.6-M1</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>

@@ -2055,7 +2055,7 @@ public final class JSONScanner extends JSONLexerBase {
             int startIndex = index;
             int endIndex = indexOf('"', startIndex);
             if (endIndex == -1) {
-                throw new JSONException("unclosed str");
+                throw new JSONException("unclosed str 1");
             }
 
             int rest = endIndex - startIndex;
